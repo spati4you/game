@@ -104,6 +104,19 @@ body::before{content:'';position:fixed;inset:0;
   padding:2.5rem 2rem;max-width:480px;width:100%;text-align:center;
   animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);}
 @keyframes popIn{from{transform:scale(0.75) translateY(20px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
+@keyframes revealFlip{
+  0%{transform:rotateY(90deg) scale(0.8);opacity:0;}
+  60%{transform:rotateY(-8deg) scale(1.05);}
+  100%{transform:rotateY(0deg) scale(1);opacity:1;}
+}
+.popup.reveal{animation:revealFlip 0.45s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes blockWiggle{
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-3px) rotate(-1deg);}
+  75%{transform:translateX(3px) rotate(1deg);}
+  100%{transform:translateX(0);}
+}
+.jng-block:not(.pulled):active{animation:blockWiggle 0.15s ease-in-out;}
 .popup-badge{display:inline-block;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;
   padding:0.2rem 0.7rem;border-radius:100px;margin-bottom:0.75rem;}
 .popup-icon{font-size:2.8rem;display:block;margin-bottom:0.6rem;}
@@ -150,15 +163,37 @@ body::before{content:'';position:fixed;inset:0;
 .jng-body{max-width:700px;margin:0 auto;padding:2rem 1.5rem;}
 .jenga-tower{display:flex;flex-direction:column;gap:4px;align-items:center;margin-bottom:1.5rem;}
 .jng-row{display:flex;gap:4px;}
-.jng-block{width:72px;height:26px;border-radius:4px;border:1px solid;
+.jng-block{
+  width:72px;height:26px;border-radius:4px;
+  background:linear-gradient(135deg,#c8a96e,#b8935a);
+  border:1px solid #8B6914;
+  box-shadow:0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
   display:flex;align-items:center;justify-content:center;font-size:0.6rem;
-  cursor:pointer;transition:all 0.2s;user-select:none;font-weight:700;letter-spacing:0.03em;}
-.jng-block.safe{background:rgba(29,185,84,0.12);border-color:rgba(29,185,84,0.4);color:var(--green);}
-.jng-block.strip{background:rgba(232,0,61,0.12);border-color:rgba(232,0,61,0.4);color:var(--red);}
-.jng-block.dare{background:rgba(155,48,255,0.12);border-color:rgba(155,48,255,0.4);color:var(--purple);}
-.jng-block.wild{background:rgba(245,197,24,0.12);border-color:rgba(245,197,24,0.4);color:var(--gold);}
-.jng-block.pulled{opacity:0.2;cursor:default;text-decoration:line-through;}
-.jng-block:not(.pulled):hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
+  cursor:pointer;transition:all 0.15s;user-select:none;
+  color:transparent; /* hide any text */
+  position:relative;
+}
+/* Wood grain effect */
+.jng-block::after{
+  content:'';position:absolute;inset:0;border-radius:4px;
+  background:repeating-linear-gradient(90deg,transparent,transparent 8px,rgba(0,0,0,0.04) 8px,rgba(0,0,0,0.04) 9px);
+  pointer-events:none;
+}
+.jng-block:not(.pulled):hover{
+  transform:translateY(-2px) scale(1.04);
+  box-shadow:0 6px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+  background:linear-gradient(135deg,#d4b47a,#c8a060);
+  cursor:grab;
+}
+.jng-block.pulled{
+  background:rgba(255,255,255,0.03)!important;
+  border:1px dashed rgba(255,255,255,0.1)!important;
+  box-shadow:none!important;
+  cursor:default;
+  opacity:0.4;
+}
+.jng-block.pulled::after{display:none;}
+/* revealed state shown only in popup, not on block */
 .jng-legend{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem;font-size:0.78rem;}
 .jng-leg{display:flex;align-items:center;gap:0.3rem;color:var(--muted);}
 .leg-dot{width:10px;height:10px;border-radius:2px;}
@@ -459,11 +494,8 @@ body::before{content:'';position:fixed;inset:0;
       <span class="turn-name" id="jng-turn">Player 1's Turn</span>
       <span style="font-size:0.8rem;color:var(--muted);">Pull a block to reveal your fate</span>
     </div>
-    <div class="jng-legend">
-      <div class="jng-leg"><div class="leg-dot" style="background:var(--green)"></div>Safe</div>
-      <div class="jng-leg"><div class="leg-dot" style="background:var(--red)"></div>Strip</div>
-      <div class="jng-leg"><div class="leg-dot" style="background:var(--purple)"></div>Dare</div>
-      <div class="jng-leg"><div class="leg-dot" style="background:var(--gold)"></div>Wild</div>
+    <div style="text-align:center;font-size:0.82rem;color:var(--muted);margin-bottom:1rem;letter-spacing:0.03em;">
+      🪵 Every block is a mystery — click one to pull it and find out your fate!
     </div>
     <div class="jenga-tower" id="jengaTower"></div>
   </div>
@@ -625,8 +657,8 @@ const DARES_BY_GENDER = {
     wild:[
       {t:"Finger Yourself",d:"Touch yourself intimately on camera for 60 seconds. Maintain eye contact with the camera the entire time. Do not finish."},
       {t:"imagine & Tell",d:"get an object like pen or something and insert it inside imagining your partner and move how you want it to be moved"},
-      {t:"Doggy Tease",d:"Get on your hands and knees spreading your legs in front of the camera. Look back over your shoulder and describe what you'd want your partner to do for 1min."},
-      {t:"Spread & Tease",d:"Sit facing the camera, slowly spread your knees apart and run your hands along your inner thighs. Tell your partner exactly what you're imagining. dont finish"},
+      {t:"Doggy Tease",d:"Get on your hands and knees spreading your legs in front of the camera. traise your hands, Look back over your shoulder and describe what you'd want your partner to do for 1min."},
+      {t:"Spread & Tease",d:"Sit facing the camera, slowly spread your knees apart and run your hands along your inner thighs and use any object to fuck yourself the way you want to be fucked describing it to your partner exactly what you're imagining. dont finish"},
     ]
   },
   // Male-specific
@@ -741,6 +773,10 @@ function showPopup({badge,badgeColor,icon,title,text,actions}){
     btn.onclick=a.fn;
     ac.appendChild(btn);
   });
+  const popupEl = document.querySelector('.popup');
+  popupEl.classList.remove('reveal');
+  void popupEl.offsetWidth; // reflow
+  popupEl.classList.add('reveal');
   document.getElementById('overlay').classList.remove('hidden');
 }
 function closePopup(){document.getElementById('overlay').classList.add('hidden');}
@@ -999,9 +1035,8 @@ function renderJenga(){
     const rowEl=document.createElement('div');rowEl.className='jng-row';
     g.tower[r].forEach((block,c)=>{
       const el=document.createElement('div');
-      el.className=`jng-block ${block.type}${block.pulled?' pulled':''}`;
-      const labels={safe:'SAFE',strip:'STRIP',dare:'DARE',wild:'WILD'};
-      el.textContent=labels[block.type];
+      el.className=`jng-block${block.pulled?' pulled':''}`;
+      el.textContent='';
       if(!block.pulled) el.onclick=()=>pullBlock(r,c);
       rowEl.appendChild(el);
     });
