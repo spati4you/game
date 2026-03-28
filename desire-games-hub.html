@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desire Games Hub 🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080810;--panel:#0f0f1e;--card:#16162a;--card2:#1e1e35;
+  --red:#e8003d;--gold:#f5c518;--green:#1db954;--blue:#1a6fff;
+  --purple:#9b30ff;--pink:#ff2d78;--orange:#ff8c00;--teal:#00b4b4;
+  --text:#f0f0f8;--muted:#606080;--border:#25254a;--felt:#0a1a0a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;min-height:100vh;}
+
+body::before{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 15% 15%,rgba(232,0,61,0.07) 0%,transparent 55%),
+  radial-gradient(ellipse 60% 60% at 85% 85%,rgba(155,48,255,0.06) 0%,transparent 55%),
+  radial-gradient(ellipse 40% 40% at 50% 50%,rgba(245,197,24,0.03) 0%,transparent 60%);
+  pointer-events:none;z-index:0;}
+
+.hidden{display:none!important;}
+.screen{position:relative;z-index:1;}
+
+/* ========= HUB ========= */
+#hub{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1rem;}
+
+.hub-logo{text-align:center;margin-bottom:3rem;}
+.hub-logo .eyebrow{font-size:0.7rem;letter-spacing:0.4em;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem;}
+.hub-logo h1{font-family:'Cinzel',serif;font-size:clamp(2.2rem,7vw,4rem);font-weight:900;
+  background:linear-gradient(135deg,#ff2d78,#f5c518,#9b30ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;text-shadow:none;}
+.hub-logo p{color:var(--muted);font-size:0.9rem;margin-top:0.6rem;letter-spacing:0.05em;}
+
+.games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;max-width:900px;width:100%;}
+
+.game-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.5rem;
+  text-align:center;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
+.game-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.25s;}
+.game-card:hover{transform:translateY(-4px);border-color:currentColor;}
+.game-card:hover::before{opacity:1;}
+
+.game-card.c-red{color:var(--red);}
+.game-card.c-red::before{background:radial-gradient(ellipse at center,rgba(232,0,61,0.12),transparent);}
+.game-card.c-purple{color:var(--purple);}
+.game-card.c-purple::before{background:radial-gradient(ellipse at center,rgba(155,48,255,0.12),transparent);}
+.game-card.c-gold{color:var(--gold);}
+.game-card.c-gold::before{background:radial-gradient(ellipse at center,rgba(245,197,24,0.12),transparent);}
+.game-card.c-green{color:var(--green);}
+.game-card.c-green::before{background:radial-gradient(ellipse at center,rgba(29,185,84,0.12),transparent);}
+
+.game-card .gc-icon{font-size:2.8rem;display:block;margin-bottom:0.75rem;}
+.game-card h3{font-family:'Cinzel',serif;font-size:1.05rem;margin-bottom:0.4rem;}
+.game-card p{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+
+/* ========= SHARED HEADER ========= */
+.game-header{display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;
+  background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;}
+.game-header h2{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);flex:1;}
+.back-btn{background:transparent;border:1px solid var(--border);color:var(--muted);
+  border-radius:8px;padding:0.4rem 0.9rem;font-family:'Lato',sans-serif;font-size:0.82rem;
+  cursor:pointer;transition:all 0.2s;}
+.back-btn:hover{border-color:var(--red);color:var(--red);}
+
+/* ========= BUTTONS ========= */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;
+  background:linear-gradient(135deg,var(--red),#b0002e);color:#fff;border:none;
+  border-radius:10px;padding:0.8rem 1.8rem;font-family:'Lato',sans-serif;font-size:0.95rem;
+  font-weight:700;cursor:pointer;letter-spacing:0.03em;transition:all 0.2s;
+  box-shadow:0 4px 20px rgba(232,0,61,0.3);}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,0,61,0.4);}
+.btn:active{transform:translateY(0);}
+.btn.gold{background:linear-gradient(135deg,var(--gold),#c9a000);box-shadow:0 4px 20px rgba(245,197,24,0.3);color:#111;}
+.btn.gold:hover{box-shadow:0 8px 28px rgba(245,197,24,0.4);}
+.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--muted);box-shadow:none;}
+.btn.ghost:hover{border-color:var(--red);color:var(--red);box-shadow:none;}
+.btn.purple{background:linear-gradient(135deg,var(--purple),#6a1fbe);box-shadow:0 4px 20px rgba(155,48,255,0.3);}
+.btn.green-btn{background:linear-gradient(135deg,var(--green),#148a3a);box-shadow:0 4px 20px rgba(29,185,84,0.3);color:#fff;}
+
+/* ========= SETUP FORMS ========= */
+.setup-wrap{max-width:520px;margin:0 auto;padding:2rem 1.5rem;}
+.setup-title{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--gold);text-align:center;margin-bottom:0.4rem;}
+.setup-sub{color:var(--muted);font-size:0.85rem;text-align:center;margin-bottom:1.5rem;}
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-bottom:0.35rem;}
+.field input,.field select{width:100%;background:#0a0a18;border:1px solid var(--border);border-radius:8px;
+  padding:0.65rem 1rem;color:var(--text);font-family:'Lato',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;}
+.field input:focus,.field select:focus{border-color:var(--gold);}
+.field-row{display:flex;gap:0.75rem;flex-wrap:wrap;}
+.field-row .field{flex:1;min-width:140px;}
+.chip-group{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.4rem;}
+.chip{padding:0.28rem 0.7rem;border:1px solid var(--border);border-radius:6px;font-size:0.78rem;
+  color:var(--muted);cursor:pointer;transition:all 0.15s;user-select:none;}
+.chip.on{border-color:var(--gold);color:var(--gold);background:rgba(245,197,24,0.1);}
+
+/* ========= POPUP OVERLAY ========= */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:flex;align-items:center;
+  justify-content:center;z-index:200;padding:1rem;backdrop-filter:blur(8px);}
+.popup{background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:2.5rem 2rem;max-width:480px;width:100%;text-align:center;
+  animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes popIn{from{transform:scale(0.75) translateY(20px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
+.popup-badge{display:inline-block;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;
+  padding:0.2rem 0.7rem;border-radius:100px;margin-bottom:0.75rem;}
+.popup-icon{font-size:2.8rem;display:block;margin-bottom:0.6rem;}
+.popup-title{font-family:'Cinzel',serif;font-size:1.4rem;margin-bottom:0.75rem;}
+.popup-text{font-size:0.97rem;line-height:1.65;color:#ccc;margin-bottom:1.5rem;white-space:pre-line;}
+.popup-actions{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;}
+
+/* ========= TRUTH & DARE ========= */
+#td-game{min-height:100vh;}
+.td-body{max-width:640px;margin:0 auto;padding:2rem 1.5rem;}
+.turn-bar{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:0.9rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+.turn-name{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);}
+.score-badges{display:flex;gap:0.5rem;margin-left:auto;}
+.score-badge{padding:0.25rem 0.7rem;border-radius:6px;font-size:0.78rem;background:var(--card2);border:1px solid var(--border);}
+
+.td-card{background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:2.5rem 2rem;text-align:center;min-height:220px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.td-card::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(232,0,61,0.04),transparent,rgba(155,48,255,0.04));pointer-events:none;}
+.td-type-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.2em;
+  padding:0.2rem 0.8rem;border-radius:100px;margin-bottom:1rem;}
+.td-type-label.truth{background:rgba(29,185,84,0.15);color:var(--green);}
+.td-type-label.dare{background:rgba(232,0,61,0.15);color:var(--red);}
+.td-question{font-size:1.15rem;line-height:1.6;color:var(--text);max-width:460px;}
+.td-actions{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;}
+
+/* ========= ROULETTE ========= */
+#rou-game{min-height:100vh;}
+.rou-body{max-width:640px;margin:0 auto;padding:2rem 1.5rem;text-align:center;}
+.wheel-wrap{position:relative;width:300px;height:300px;margin:0 auto 1.5rem;}
+.wheel-canvas{width:300px;height:300px;border-radius:50%;border:6px solid var(--gold);
+  box-shadow:0 0 40px rgba(245,197,24,0.25);transition:transform 3s cubic-bezier(0.17,0.67,0.12,1);}
+.wheel-pointer{position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;
+  border-top:24px solid var(--gold);filter:drop-shadow(0 0 6px var(--gold));z-index:5;}
+.rou-result{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1rem 1.5rem;margin-bottom:1.25rem;font-size:0.95rem;color:var(--gold);min-height:52px;
+  display:flex;align-items:center;justify-content:center;}
+
+/* ========= JENGA ========= */
+#jng-game{min-height:100vh;}
+.jng-body{max-width:700px;margin:0 auto;padding:2rem 1.5rem;}
+.jenga-tower{display:flex;flex-direction:column;gap:4px;align-items:center;margin-bottom:1.5rem;}
+.jng-row{display:flex;gap:4px;}
+.jng-block{width:72px;height:26px;border-radius:4px;border:1px solid;
+  display:flex;align-items:center;justify-content:center;font-size:0.6rem;
+  cursor:pointer;transition:all 0.2s;user-select:none;font-weight:700;letter-spacing:0.03em;}
+.jng-block.safe{background:rgba(29,185,84,0.12);border-color:rgba(29,185,84,0.4);color:var(--green);}
+.jng-block.strip{background:rgba(232,0,61,0.12);border-color:rgba(232,0,61,0.4);color:var(--red);}
+.jng-block.dare{background:rgba(155,48,255,0.12);border-color:rgba(155,48,255,0.4);color:var(--purple);}
+.jng-block.wild{background:rgba(245,197,24,0.12);border-color:rgba(245,197,24,0.4);color:var(--gold);}
+.jng-block.pulled{opacity:0.2;cursor:default;text-decoration:line-through;}
+.jng-block:not(.pulled):hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
+.jng-legend{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem;font-size:0.78rem;}
+.jng-leg{display:flex;align-items:center;gap:0.3rem;color:var(--muted);}
+.leg-dot{width:10px;height:10px;border-radius:2px;}
+
+/* ========= MONOPOLY ========= */
+#mono-game{min-height:100vh;}
+.mono-body{max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem;}
+
+/* Board layout */
+.mono-layout{display:grid;grid-template-areas:"corner-tl top corner-tr""left center right""corner-bl bottom corner-br";
+  gap:3px;background:var(--felt);border:4px solid var(--gold);border-radius:4px;
+  padding:3px;margin-bottom:1.5rem;box-shadow:0 0 50px rgba(245,197,24,0.1);overflow-x:auto;}
+
+.mono-top{grid-area:top;display:grid;grid-template-columns:repeat(9,1fr);gap:3px;}
+.mono-bottom{grid-area:bottom;display:grid;grid-template-columns:repeat(9,1fr);gap:3px;}
+.mono-left{grid-area:left;display:grid;grid-template-rows:repeat(9,1fr);gap:3px;}
+.mono-right{grid-area:right;display:grid;grid-template-rows:repeat(9,1fr);gap:3px;}
+
+.mono-center{grid-area:center;background:var(--felt);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:1rem;min-height:200px;}
+.mono-center-title{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--gold);text-align:center;margin-bottom:0.4rem;}
+.mono-center-sub{font-size:0.72rem;color:var(--muted);text-align:center;letter-spacing:0.1em;margin-bottom:1rem;}
+.center-dice-area{display:flex;gap:0.75rem;align-items:center;justify-content:center;flex-wrap:wrap;}
+.mono-die{width:52px;height:52px;background:var(--card);border:2px solid var(--border);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;transition:all 0.3s;}
+.mono-die.rolling{animation:dRoll 0.5s ease-in-out;}
+@keyframes dRoll{0%{transform:rotate(0)scale(1)}30%{transform:rotate(-20deg)scale(1.2)}60%{transform:rotate(15deg)scale(0.9)}100%{transform:rotate(0)scale(1)}}
+
+/* Board squares */
+.msq{background:var(--card);border:1px solid var(--border);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:3px 2px;position:relative;
+  font-size:0.52rem;text-align:center;min-height:60px;transition:all 0.2s;}
+.msq .sq-icon{font-size:1.1rem;line-height:1;margin-bottom:1px;}
+.msq .sq-label{color:var(--muted);font-size:0.48rem;line-height:1.2;max-width:52px;}
+.msq .sq-name{font-size:0.55rem;font-weight:700;line-height:1.3;margin-bottom:1px;}
+.msq-corner{min-width:70px;min-height:70px;font-size:0.65rem;}
+
+.msq.t-strip{border-top:4px solid var(--red);}
+.msq.t-dare{border-top:4px solid var(--purple);}
+.msq.t-reward{border-top:4px solid var(--green);}
+.msq.t-challenge{border-top:4px solid var(--orange);}
+.msq.t-wild{border-top:4px solid var(--gold);}
+.msq.t-start{border-top:4px solid var(--blue);}
+
+/* Bottom squares rotate */
+.mono-bottom .msq{transform:rotate(180deg);}
+.mono-left .msq{transform:rotate(90deg);}
+.mono-right .msq{transform:rotate(-90deg);}
+
+.token{position:absolute;width:13px;height:13px;border-radius:50%;
+  border:2px solid white;font-size:0.5rem;display:flex;align-items:center;
+  justify-content:center;z-index:5;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+.tok-p1{background:var(--red);top:4px;left:4px;}
+.tok-p2{background:var(--blue);bottom:4px;right:4px;}
+
+.mono-info-bar{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;}
+.m-player-card{flex:1;min-width:180px;background:var(--card);border:2px solid var(--border);
+  border-radius:12px;padding:0.9rem 1.1rem;transition:border-color 0.3s;}
+.m-player-card.active{border-color:var(--gold);box-shadow:0 0 16px rgba(245,197,24,0.15);}
+.m-pc-name{font-family:'Cinzel',serif;font-size:0.95rem;margin-bottom:0.25rem;}
+.m-pc-sq{font-size:0.75rem;color:var(--muted);margin-bottom:0.4rem;}
+.m-pc-clothes{display:flex;flex-wrap:wrap;gap:3px;}
+.m-cloth{font-size:0.68rem;padding:0.15rem 0.4rem;border-radius:4px;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);}
+.m-cloth.off{text-decoration:line-through;opacity:0.3;border-color:var(--red);}
+
+.mono-controls{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:0.5rem;}
+
+/* ========= DARE LIST SCREEN ========= */
+#dare-list{min-height:100vh;}
+.dare-list-body{max-width:760px;margin:0 auto;padding:2rem 1.5rem;}
+.dare-section{margin-bottom:2rem;}
+.dare-section h3{font-family:'Cinzel',serif;font-size:1rem;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);}
+.dare-section h3.red{color:var(--red);}
+.dare-section h3.purple{color:var(--purple);}
+.dare-section h3.gold{color:var(--gold);}
+.dare-section h3.green{color:var(--green);}
+.dare-item{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:0.7rem 1rem;margin-bottom:0.5rem;font-size:0.88rem;line-height:1.55;
+  display:flex;align-items:flex-start;gap:0.6rem;}
+.dare-item .di-num{color:var(--muted);font-size:0.75rem;min-width:20px;margin-top:0.1rem;}
+.dare-item .di-text{flex:1;}
+.dare-item .di-tag{font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;white-space:nowrap;margin-top:0.15rem;}
+.tag-f{background:rgba(255,45,120,0.15);color:var(--pink);}
+.tag-m{background:rgba(26,111,255,0.15);color:var(--blue);}
+.tag-b{background:rgba(245,197,24,0.15);color:var(--gold);}
+.copy-hint{background:var(--card);border:1px solid var(--gold);border-radius:10px;
+  padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:0.85rem;color:var(--gold);line-height:1.6;}
+
+/* ========= WIN ========= */
+#win-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;}
+.win-box{background:var(--card);border:2px solid var(--gold);border-radius:20px;
+  padding:3rem 2.5rem;max-width:420px;width:100%;text-align:center;
+  box-shadow:0 0 60px rgba(245,197,24,0.15);}
+.win-crown{font-size:3.5rem;display:block;animation:bounce 1s ease-in-out infinite alternate;}
+@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-10px);}}
+.win-title{font-family:'Cinzel',serif;font-size:2rem;color:var(--gold);margin-bottom:0.5rem;}
+
+.confetti-piece{position:fixed;pointer-events:none;z-index:999;border-radius:2px;animation:fall linear forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+
+@media(max-width:600px){
+  .games-grid{grid-template-columns:1fr 1fr;}
+  .jenga-tower{transform:scale(0.85);transform-origin:top center;}
+  .jng-block{width:60px;height:22px;}
+}
+@media(max-width:400px){
+  .games-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ========= HUB ========= -->
+<div id="hub" class="screen">
+  <div class="hub-logo">
+    <div class="eyebrow">Long Distance Edition</div>
+    <h1>Desire Games</h1>
+    <p>Four hot games. One wild night. 🔥</p>
+  </div>
+  <div class="games-grid">
+    <div class="game-card c-red" onclick="showTDSetup()">
+      <span class="gc-icon">🎯</span>
+      <h3>Truth & Dare</h3>
+      <p>Spicy questions and daring challenges for two</p>
+    </div>
+    <div class="game-card c-purple" onclick="showRouSetup()">
+      <span class="gc-icon">🎡</span>
+      <h3>Desire Roulette</h3>
+      <p>Spin the wheel — whatever it lands on, you do</p>
+    </div>
+    <div class="game-card c-gold" onclick="showJngSetup()">
+      <span class="gc-icon">🧱</span>
+      <h3>Strip Jenga</h3>
+      <p>Pull a block — strip, dare, or face the wild card</p>
+    </div>
+    <div class="game-card c-green" onclick="showMonoSetup()">
+      <span class="gc-icon">🎲</span>
+      <h3>Naughty Monopoly</h3>
+      <p>Roll, move, strip and dare your way to victory</p>
+    </div>
+    <div class="game-card c-purple" onclick="showDareList()" style="grid-column:span 2;">
+      <span class="gc-icon">📋</span>
+      <h3>Dare List (Copy & Paste)</h3>
+      <p>Full written dare list — copy into any game</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========= TRUTH & DARE SETUP ========= -->
+<div id="td-setup" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>Truth & Dare — Setup</h2>
+  </div>
+  <div class="setup-wrap">
+    <div class="setup-title">Who's playing?</div>
+    <div class="setup-sub">Enter names and choose your heat level</div>
+    <div class="field-row">
+      <div class="field"><label>Player 1 Name</label><input id="td-n1" placeholder="Your name" maxlength="12"></div>
+      <div class="field"><label>Player 2 Name</label><input id="td-n2" placeholder="Their name" maxlength="12"></div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Player 1 Gender</label>
+        <select id="td-g1"><option value="f">Female</option><option value="m">Male</option></select>
+      </div>
+      <div class="field">
+        <label>Player 2 Gender</label>
+        <select id="td-g2"><option value="m">Male</option><option value="f">Female</option></select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Heat Level</label>
+      <div class="chip-group" id="td-heat">
+        <div class="chip on" data-v="mild">🌶 Mild</div>
+        <div class="chip" data-v="hot">🔥 Hot</div>
+        <div class="chip" data-v="wild">💥 Wild</div>
+      </div>
+    </div>
+    <br>
+    <button class="btn" style="width:100%" onclick="startTD()">Start Game 🎯</button>
+  </div>
+</div>
+
+<!-- ========= TRUTH & DARE GAME ========= -->
+<div id="td-game" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>Truth & Dare 🎯</h2>
+  </div>
+  <div class="td-body">
+    <div class="turn-bar">
+      <span class="turn-name" id="td-turn-name">Player 1's Turn</span>
+      <div class="score-badges">
+        <div class="score-badge" id="td-s1">P1: 0</div>
+        <div class="score-badge" id="td-s2">P2: 0</div>
+      </div>
+    </div>
+    <div class="td-card">
+      <div class="td-type-label" id="td-type-label">READY</div>
+      <div class="td-question" id="td-question">Choose Truth or Dare below to begin!</div>
+    </div>
+    <div class="td-actions">
+      <button class="btn green-btn" onclick="drawTD('truth')">💚 Truth</button>
+      <button class="btn" onclick="drawTD('dare')">🔥 Dare</button>
+      <button class="btn ghost" onclick="completeTD(true)">✓ Done (+pts)</button>
+      <button class="btn ghost" onclick="completeTD(false)">✗ Skip</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========= ROULETTE SETUP ========= -->
+<div id="rou-setup" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>Desire Roulette — Setup</h2>
+  </div>
+  <div class="setup-wrap">
+    <div class="setup-title">Spin the Wheel</div>
+    <div class="setup-sub">The wheel decides your fate</div>
+    <div class="field-row">
+      <div class="field"><label>Player 1</label><input id="rou-n1" placeholder="Name" maxlength="12"></div>
+      <div class="field"><label>Player 2</label><input id="rou-n2" placeholder="Name" maxlength="12"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>P1 Gender</label><select id="rou-g1"><option value="f">Female</option><option value="m">Male</option></select></div>
+      <div class="field"><label>P2 Gender</label><select id="rou-g2"><option value="m">Male</option><option value="f">Female</option></select></div>
+    </div>
+    <br>
+    <button class="btn purple" style="width:100%" onclick="startRou()">Enter the Wheel 🎡</button>
+  </div>
+</div>
+
+<!-- ========= ROULETTE GAME ========= -->
+<div id="rou-game" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>Desire Roulette 🎡</h2>
+  </div>
+  <div class="rou-body">
+    <div style="margin-bottom:1rem;color:var(--muted);font-size:0.85rem;" id="rou-turn-label">Player 1's turn</div>
+    <div class="wheel-wrap">
+      <div class="wheel-pointer"></div>
+      <canvas class="wheel-canvas" id="wheelCanvas" width="300" height="300"></canvas>
+    </div>
+    <div class="rou-result" id="rou-result">Spin the wheel to see your fate...</div>
+    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn purple" id="rou-spin-btn" onclick="spinWheel()">Spin! 🎡</button>
+      <button class="btn ghost" onclick="rouNext()">Next Turn ➜</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========= JENGA SETUP ========= -->
+<div id="jng-setup" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>Strip Jenga — Setup</h2>
+  </div>
+  <div class="setup-wrap">
+    <div class="setup-title">Strip Jenga</div>
+    <div class="setup-sub">Pull a block. Face the consequences.</div>
+    <div class="field-row">
+      <div class="field"><label>Player 1</label><input id="jng-n1" placeholder="Name" maxlength="12"></div>
+      <div class="field"><label>Player 2</label><input id="jng-n2" placeholder="Name" maxlength="12"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>P1 Gender</label><select id="jng-g1"><option value="f">Female</option><option value="m">Male</option></select></div>
+      <div class="field"><label>P2 Gender</label><select id="jng-g2"><option value="m">Male</option><option value="f">Female</option></select></div>
+    </div>
+    <div class="field">
+      <label>Clothes each player is wearing</label>
+      <div class="chip-group" id="jng-clothes">
+        <div class="chip on" data-item="Top">👕 Top</div>
+        <div class="chip on" data-item="Pants">👖 Pants</div>
+        <div class="chip on" data-item="Socks">🧦 Socks</div>
+        <div class="chip on" data-item="Underwear">🩲 Underwear</div>
+        <div class="chip on" data-item="Bra">👙 Bra</div>
+        <div class="chip" data-item="Jacket">🧥 Jacket</div>
+        <div class="chip" data-item="Belt">👔 Belt</div>
+      </div>
+    </div>
+    <br>
+    <button class="btn gold" style="width:100%" onclick="startJng()">Build the Tower 🧱</button>
+  </div>
+</div>
+
+<!-- ========= JENGA GAME ========= -->
+<div id="jng-game" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>Strip Jenga 🧱</h2>
+  </div>
+  <div class="jng-body">
+    <div class="turn-bar">
+      <span class="turn-name" id="jng-turn">Player 1's Turn</span>
+      <span style="font-size:0.8rem;color:var(--muted);">Pull a block to reveal your fate</span>
+    </div>
+    <div class="jng-legend">
+      <div class="jng-leg"><div class="leg-dot" style="background:var(--green)"></div>Safe</div>
+      <div class="jng-leg"><div class="leg-dot" style="background:var(--red)"></div>Strip</div>
+      <div class="jng-leg"><div class="leg-dot" style="background:var(--purple)"></div>Dare</div>
+      <div class="jng-leg"><div class="leg-dot" style="background:var(--gold)"></div>Wild</div>
+    </div>
+    <div class="jenga-tower" id="jengaTower"></div>
+  </div>
+</div>
+
+<!-- ========= MONO SETUP ========= -->
+<div id="mono-setup" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>Naughty Monopoly — Setup</h2>
+  </div>
+  <div class="setup-wrap">
+    <div class="setup-title">Naughty Monopoly</div>
+    <div class="setup-sub">Roll dice, move tokens, strip and dare.</div>
+    <div class="field-row">
+      <div class="field"><label>Player 1</label><input id="mo-n1" placeholder="Name" maxlength="12"></div>
+      <div class="field"><label>Player 2</label><input id="mo-n2" placeholder="Name" maxlength="12"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>P1 Gender</label><select id="mo-g1"><option value="f">Female</option><option value="m">Male</option></select></div>
+      <div class="field"><label>P2 Gender</label><select id="mo-g2"><option value="m">Male</option><option value="f">Female</option></select></div>
+    </div>
+    <div class="field">
+      <label>Clothes (each player)</label>
+      <div class="chip-group" id="mo-clothes">
+        <div class="chip on" data-item="Top">👕 Top</div>
+        <div class="chip on" data-item="Pants">👖 Pants</div>
+        <div class="chip on" data-item="Socks">🧦 Socks</div>
+        <div class="chip on" data-item="Underwear">🩲 Underwear</div>
+        <div class="chip on" data-item="Bra">👙 Bra</div>
+        <div class="chip" data-item="Jacket">🧥 Jacket</div>
+        <div class="chip" data-item="Belt">👔 Belt</div>
+      </div>
+    </div>
+    <br>
+    <button class="btn green-btn" style="width:100%" onclick="startMono()">Start Monopoly 🎲</button>
+  </div>
+</div>
+
+<!-- ========= MONO GAME ========= -->
+<div id="mono-game" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>Naughty Monopoly 🎲</h2>
+  </div>
+  <div class="mono-body">
+    <div class="mono-info-bar" id="mono-info-bar"></div>
+    <div class="mono-layout" id="monoBoard"></div>
+    <div class="mono-controls">
+      <button class="btn" id="mono-roll-btn" onclick="monoRoll()">🎲 Roll Dice</button>
+      <button class="btn ghost" onclick="goHub()">← Hub</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========= DARE LIST ========= -->
+<div id="dare-list" class="screen hidden">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHub()">← Hub</button>
+    <h2>📋 Dare List — Copy & Paste</h2>
+  </div>
+  <div class="dare-list-body" id="dareListBody"></div>
+</div>
+
+<!-- ========= WIN SCREEN ========= -->
+<div id="win-screen" class="screen hidden">
+  <div class="win-box">
+    <span class="win-crown">👑</span>
+    <div class="win-title" id="win-title">Winner!</div>
+    <p style="color:var(--muted);margin-bottom:1.5rem;" id="win-sub"></p>
+    <button class="btn" style="width:100%" onclick="goHub()">Back to Hub 🔥</button>
+  </div>
+</div>
+
+<!-- ========= POPUP ========= -->
+<div class="overlay hidden" id="overlay">
+  <div class="popup">
+    <div class="popup-badge" id="pop-badge"></div>
+    <span class="popup-icon" id="pop-icon"></span>
+    <div class="popup-title" id="pop-title"></div>
+    <div class="popup-text" id="pop-text"></div>
+    <div class="popup-actions" id="pop-actions"></div>
+  </div>
+</div>
+
+<script>
+// =============================================
+// DATA
+// =============================================
+
+const TRUTHS = {
+  mild:[
+    "What's the first thing you noticed about me when we first met?",
+    "Describe your ideal date night with me from start to finish.",
+    "What outfit of mine do you find most attractive?",
+    "Where on your body do you most want me to touch you when we reunite?",
+    "What's a memory of us that still makes you blush?",
+    "Describe what you'd whisper in my ear if I were next to you right now.",
+    "What's one thing about my body you think about most?",
+    "What song makes you think about me and why?",
+  ],
+  hot:[
+    "Describe in detail the fantasy you've had about me most recently.",
+    "What's the most daring thing you've ever wanted to do with me?",
+    "Tell me exactly what you'd do to me for the first 10 minutes if I walked in your door right now.",
+    "What part of your body are you most self-conscious about — and what would it take from me to make you feel confident about it?",
+    "What's a kink you've been curious about but haven't told me yet?",
+    "When was the last time you thought about me in a sexual way today?",
+    "Describe the position you think about most when you imagine us together.",
+    "What's the most unexpected place you'd want to be intimate with me?",
+  ],
+  wild:[
+    "Be completely honest — what's the single hottest fantasy you have about us that you've never said out loud?",
+    "Describe your perfect intimate evening with me — every single detail, nothing held back.",
+    "What's something you want me to do to you that you've been too shy to ask for?",
+    "Tell me exactly what you imagine when you touch yourself and think of me.",
+    "What's the dirtiest thought you've had about me this week?",
+    "If you could replay one intimate moment between us in slow motion, which one and why?",
+    "Name 3 things you want to try with me that we've never done.",
+  ]
+};
+
+const DARES_BY_GENDER = {
+  // Both genders
+  both:{
+    mild:[
+      {t:"Slow Reveal",d:"Remove one item of clothing very slowly (at least 30 seconds) on camera. Maintain eye contact the whole time."},
+      {t:"Neck Trace",d:"Run your fingertips slowly along your neck and collarbone on camera for 20 seconds. Describe how it feels."},
+      {t:"Whisper",d:"Lean close to the camera and whisper the most intimate thing you want to do to your partner right now."},
+      {t:"Ice Cube",d:"Get an ice cube and trace it slowly along your neck and down your collarbone on camera. Keep going until it melts."},
+      {t:"Partner Strips",d:"Your PARTNER must remove one item of their choice right now on camera. Watch them do it."},
+      {t:"Compliment Body",d:"Point to 5 spots on your own body — one at a time on camera — and say what you like about each one."},
+    ],
+    hot:[
+      {t:"The Countdown",d:"Your partner counts down slowly from 10. With each number, move your hand one inch lower on your body. Stop wherever they say stop."},
+      {t:"Breathe",d:"Hold your face close to the camera and breathe slowly three times. Your partner rates how turned on they are 1–10. If they rate under 7, remove an item."},
+      {t:"Undress Slowly",d:"Remove your current top or shirt as slowly as possible. Your partner narrates what they'd do if they were there."},
+      {t:"Mirror Hands",d:"Your partner tells you one spot on your body. You touch it on camera for 20 seconds and describe every sensation out loud."},
+      {t:"Moan My Name",d:"Say your partner's name on camera in the most seductive way you can manage. Three times. Your partner rates it — below 8 means you strip."},
+    ],
+    wild:[
+      {t:"Touch Yourself",d:"Touch yourself over your clothes for 2 minutes on camera. You are not allowed to stop or look away from the camera."},
+      {t:"Edge & Stop",d:"Masturbate for 3 minutes. Get as close to finishing as possible — then stop completely. Tell your partner exactly how close you got."},
+      {t:"Live Fantasy",d:"Describe out loud in real time exactly what you would do to your partner if they were in bed with you right now. Be explicit. Minimum 2 minutes."},
+      {t:"Full Strip",d:"Remove every item of clothing one by one on camera. After each item, pause and let your partner look for 5 seconds before removing the next."},
+    ]
+  },
+  // Female-specific
+  f:{
+    mild:[
+      {t:"Lip Trace",d:"Slowly trace your lips with your fingertip on camera. Then tell your partner exactly where you'd kiss them first."},
+      {t:"Hair Down",d:"If your hair is up, let it down slowly on camera. Run your hands through it. If it's already down, pin it up — then let it fall again."},
+    ],
+    hot:[
+      {t:"Inner Thigh",d:"Slowly run your hand from your knee up to your inner thigh on camera. Stop just before the top. Do it twice. Tell your partner what you're imagining."},
+      {t:"Waistband",d:"Slide your hand inside your waistband and leave it there for 30 seconds on camera. Describe what you're feeling."},
+      {t:"Bra Strap",d:"Slowly slide one bra strap off your shoulder on camera and hold it there. Tell your partner what you want them to do next."},
+    ],
+    wild:[
+      {t:"Finger Yourself",d:"Touch yourself intimately on camera for 60 seconds. Maintain eye contact with the camera the entire time. Do not finish."},
+      {t:"Show & Tell",d:"Touch your most sensitive spot and describe out loud every single sensation in real time. Keep going for 90 seconds."},
+      {t:"Doggy Tease",d:"Get on your hands and knees facing away from the camera. Look back over your shoulder and describe what you'd want your partner to do."},
+      {t:"Spread & Tease",d:"Sit facing the camera, slowly spread your knees apart and run your hands along your inner thighs. Tell your partner exactly what you're imagining."},
+    ]
+  },
+  // Male-specific
+  m:{
+    mild:[
+      {t:"Flex Show",d:"Flex your arms and chest on camera for 10 seconds. Your partner tells you their favorite thing they see."},
+      {t:"Shirt Off",d:"Remove your shirt slowly on camera and hold your arms out to the sides so your partner gets a full view."},
+    ],
+    hot:[
+      {t:"Waistband Tease",d:"Slide your hand into your waistband and hold it there for 30 seconds on camera while looking directly at the camera."},
+      {t:"Stroke Tease",d:"Touch yourself over your underwear on camera for 30 seconds. Tell your partner what you're imagining."},
+      {t:"V-Line Show",d:"Pull your waistband down to show your V-line on camera. Hold it for 10 seconds while your partner watches."},
+    ],
+    wild:[
+      {t:"Stroke for Me",d:"Stroke yourself on camera for 60 seconds. Describe what you're imagining as you do it. Do not finish."},
+      {t:"Tell Me Everything",d:"Tell your partner in explicit detail what you would do to them if you were together right now. Be completely specific. Minimum 2 minutes."},
+      {t:"Edge for Me",d:"Get yourself as close to finishing as possible — then completely stop. Tell your partner how it felt and what you were imagining."},
+    ]
+  }
+};
+
+const WILD_CARDS = [
+  {t:"Spice Roll",d:"Roll a die:\n1 = Strip everything except one item\n2 = Partner decides your next dare\n3 = Both touch yourselves for 60 seconds simultaneously\n4 = Free turn — nothing happens\n5 = Both strip one item together\n6 = You choose any dare for your partner"},
+  {t:"Forfeit Promise",d:"Name one specific thing you WILL do to your partner the moment you next see each other in person. Say it out loud clearly. It is now locked in forever."},
+  {t:"Rule Maker",d:"You make one rule that applies for the next 5 turns. Examples: partner must whisper everything, partner must compliment you before each roll, etc."},
+  {t:"Double Dare",d:"Both players must complete the same dare simultaneously on camera. Roll again to draw the dare."},
+  {t:"Fantasy Lock-In",d:"Each player writes down their #1 sexual fantasy they want to try with their partner. Read them out loud at the same time."},
+];
+
+const MONO_BOARD_DEF = [
+  {type:'start',icon:'🏁',name:'GO',label:'Collect a free strip pass'},
+  {type:'strip',icon:'🔥',name:'Temptation Ave',label:'Strip'},
+  {type:'dare',icon:'😈',name:'Desire Lane',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Lust Blvd',label:'Strip'},
+  {type:'dare',icon:'😈',name:'Pleasure St',label:'Dare'},
+  {type:'wild',icon:'⭐',name:'Wild Square',label:'Wild Card'},
+  {type:'dare',icon:'😈',name:'Naughty Row',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Bare Ave',label:'Strip'},
+  {type:'dare',icon:'😈',name:'Tease Terrace',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Exposed End',label:'Strip'},
+  {type:'start',icon:'🔄',name:'Free Pass',label:'No penalty'},
+  {type:'dare',icon:'😈',name:'Silk Drive',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Heat St',label:'Strip'},
+  {type:'wild',icon:'⭐',name:'Wild Square',label:'Wild Card'},
+  {type:'dare',icon:'😈',name:'Sensation Sq',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Reveal Row',label:'Strip'},
+  {type:'dare',icon:'😈',name:'Whisper Way',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Bare Blvd',label:'Strip'},
+  {type:'dare',icon:'😈',name:'Hunger St',label:'Dare'},
+  {type:'wild',icon:'⭐',name:'Wild Square',label:'Wild Card'},
+  {type:'start',icon:'🔄',name:'Safe Zone',label:'Rest here'},
+  {type:'dare',icon:'😈',name:'Tempt Drive',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Nakd Ave',label:'Strip'},
+  {type:'dare',icon:'😈',name:'Moan Mews',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Bare Lane',label:'Strip'},
+  {type:'wild',icon:'⭐',name:'Wild Square',label:'Wild Card'},
+  {type:'dare',icon:'😈',name:'Ache Alley',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Exposed Ct',label:'Strip'},
+  {type:'dare',icon:'😈',name:'Bliss Blvd',label:'Dare'},
+  {type:'strip',icon:'🔥',name:'Last Stop',label:'Strip x2'},
+];
+
+// =============================================
+// STATE
+// =============================================
+let G = {}; // global game state
+
+// =============================================
+// NAVIGATION
+// =============================================
+function allScreens(){return document.querySelectorAll('.screen');}
+function showOnly(id){allScreens().forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
+function goHub(){closePopup();showOnly('hub');}
+
+// =============================================
+// CHIP GROUPS
+// =============================================
+document.querySelectorAll('.chip-group').forEach(group=>{
+  group.addEventListener('click',e=>{
+    const chip = e.target.closest('.chip');
+    if(!chip) return;
+    // heat groups: single select
+    if(group.id.endsWith('-heat')){
+      group.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+      chip.classList.add('on');
+    } else {
+      chip.classList.toggle('on');
+    }
+  });
+});
+
+function getChips(groupId){return [...document.querySelectorAll(`#${groupId} .chip.on`)].map(c=>c.dataset.item||c.dataset.v);}
+
+// =============================================
+// POPUP
+// =============================================
+function showPopup({badge,badgeColor,icon,title,text,actions}){
+  const b = document.getElementById('pop-badge');
+  b.textContent = badge||'';
+  b.style.cssText = `background:${badgeColor||'rgba(255,255,255,0.1)'};color:${badgeColor?'#fff':'var(--muted)'};`;
+  if(badgeColor) b.style.background = badgeColor.replace('1)','0.15)');
+  document.getElementById('pop-icon').textContent = icon||'';
+  document.getElementById('pop-title').textContent = title||'';
+  document.getElementById('pop-text').textContent = text||'';
+  const ac = document.getElementById('pop-actions');
+  ac.innerHTML='';
+  (actions||[]).forEach(a=>{
+    const btn=document.createElement('button');
+    btn.className=`btn ${a.cls||''}`;
+    btn.style.fontSize='0.88rem';btn.style.padding='0.65rem 1.2rem';
+    btn.textContent=a.label;
+    btn.onclick=a.fn;
+    ac.appendChild(btn);
+  });
+  document.getElementById('overlay').classList.remove('hidden');
+}
+function closePopup(){document.getElementById('overlay').classList.add('hidden');}
+
+// =============================================
+// CONFETTI
+// =============================================
+function confetti(){
+  const cols=['#e8003d','#f5c518','#9b30ff','#1db954','#1a6fff','#ff8c00'];
+  for(let i=0;i<55;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText=`left:${Math.random()*100}vw;top:-10px;width:${6+Math.random()*10}px;height:${6+Math.random()*10}px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*0.5}s;`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),3500);
+  }
+}
+
+function showWin(title,sub){
+  document.getElementById('win-title').textContent=title;
+  document.getElementById('win-sub').textContent=sub;
+  showOnly('win-screen');
+  confetti();
+}
+
+// =============================================
+// HELPERS
+// =============================================
+function pickRandom(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+function getDares(gender, heat){
+  const lvls = {mild:['mild'],hot:['mild','hot'],wild:['mild','hot','wild']};
+  let pool=[];
+  lvls[heat].forEach(l=>{
+    pool.push(...(DARES_BY_GENDER.both[l]||[]));
+    pool.push(...(DARES_BY_GENDER[gender][l]||[]));
+  });
+  return pool;
+}
+
+// =============================================
+// TRUTH & DARE
+// =============================================
+function showTDSetup(){showOnly('td-setup');}
+
+function startTD(){
+  G.td={
+    names:[document.getElementById('td-n1').value.trim()||'Player 1',document.getElementById('td-n2').value.trim()||'Player 2'],
+    genders:[document.getElementById('td-g1').value,document.getElementById('td-g2').value],
+    heat: getChips('td-heat')[0]||'mild',
+    turn:0,scores:[0,0],drawn:false
+  };
+  showOnly('td-game');
+  renderTD();
+}
+
+function renderTD(){
+  const g=G.td;
+  document.getElementById('td-turn-name').textContent=`${g.names[g.turn%2]}'s Turn`;
+  document.getElementById('td-s1').textContent=`${g.names[0]}: ${g.scores[0]}`;
+  document.getElementById('td-s2').textContent=`${g.names[1]}: ${g.scores[1]}`;
+}
+
+function drawTD(type){
+  const g=G.td;
+  g.drawn=true;
+  if(type==='truth'){
+    const pool=TRUTHS[g.heat]||TRUTHS.mild;
+    const q=pickRandom(pool);
+    document.getElementById('td-type-label').textContent='TRUTH';
+    document.getElementById('td-type-label').className='td-type-label truth';
+    document.getElementById('td-question').textContent=q;
+  } else {
+    const gender=g.genders[g.turn%2];
+    const pool=getDares(gender,g.heat);
+    const d=pickRandom(pool);
+    document.getElementById('td-type-label').textContent='DARE';
+    document.getElementById('td-type-label').className='td-type-label dare';
+    document.getElementById('td-question').textContent=`${d.t}: ${d.d}`;
+  }
+}
+
+function completeTD(done){
+  const g=G.td;
+  if(!g.drawn) return;
+  if(done) g.scores[g.turn%2]+=10;
+  g.turn++;g.drawn=false;
+  document.getElementById('td-question').textContent='Choose Truth or Dare below to begin!';
+  document.getElementById('td-type-label').textContent='READY';
+  document.getElementById('td-type-label').className='td-type-label';
+  renderTD();
+}
+
+// =============================================
+// ROULETTE
+// =============================================
+const ROU_SEGMENTS=[
+  {label:'Strip!',color:'#e8003d',type:'strip'},
+  {label:'Dare',color:'#9b30ff',type:'dare'},
+  {label:'Truth',color:'#1db954',type:'truth'},
+  {label:'Wild',color:'#f5c518',type:'wild'},
+  {label:'Strip x2',color:'#b0002e',type:'strip2'},
+  {label:'Partner Strips',color:'#1a6fff',type:'pstrip'},
+  {label:'Dare',color:'#7b2fbe',type:'dare'},
+  {label:'Safe!',color:'#2a2a4a',type:'safe'},
+];
+
+function showRouSetup(){showOnly('rou-setup');}
+
+function startRou(){
+  G.rou={
+    names:[document.getElementById('rou-n1').value.trim()||'Player 1',document.getElementById('rou-n2').value.trim()||'Player 2'],
+    genders:[document.getElementById('rou-g1').value,document.getElementById('rou-g2').value],
+    turn:0,spinning:false,
+    clothes:[[],[]],removed:[[],[]]
+  };
+  showOnly('rou-game');
+  drawRouWheel(0);
+  document.getElementById('rou-turn-label').textContent=`${G.rou.names[0]}'s turn — spin the wheel!`;
+}
+
+function drawRouWheel(angle){
+  const canvas=document.getElementById('wheelCanvas');
+  const ctx=canvas.getContext('2d');
+  const cx=150,cy=150,r=145;
+  const seg=ROU_SEGMENTS;
+  const arc=(2*Math.PI)/seg.length;
+  ctx.clearRect(0,0,300,300);
+  seg.forEach((s,i)=>{
+    const start=angle+i*arc;
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,start,start+arc);
+    ctx.fillStyle=s.color;ctx.fill();
+    ctx.strokeStyle='rgba(0,0,0,0.3)';ctx.lineWidth=2;ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(start+arc/2);
+    ctx.textAlign='right';ctx.fillStyle='#fff';
+    ctx.font='bold 11px Lato,sans-serif';ctx.fillText(s.label,r-8,4);
+    ctx.restore();
+  });
+}
+
+let rouAngle=0;
+function spinWheel(){
+  if(G.rou.spinning) return;
+  G.rou.spinning=true;
+  document.getElementById('rou-spin-btn').disabled=true;
+  document.getElementById('rou-result').textContent='Spinning...';
+
+  const spins=5+Math.random()*5;
+  const extra=Math.random()*2*Math.PI;
+  const totalAngle=spins*2*Math.PI+extra;
+  const duration=3000;
+  const start=performance.now();
+  const startAngle=rouAngle;
+
+  function animate(now){
+    const elapsed=now-start;
+    const progress=Math.min(elapsed/duration,1);
+    const ease=1-Math.pow(1-progress,4);
+    rouAngle=startAngle+totalAngle*ease;
+    drawRouWheel(rouAngle);
+    if(progress<1){requestAnimationFrame(animate);return;}
+
+    rouAngle=rouAngle%(2*Math.PI);
+    // Which segment is under the pointer (top = -PI/2)
+    const ptr=((-rouAngle-Math.PI/2)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+    const segIdx=Math.floor(ptr/((2*Math.PI)/ROU_SEGMENTS.length))%ROU_SEGMENTS.length;
+    const landed=ROU_SEGMENTS[segIdx];
+
+    G.rou.spinning=false;
+    document.getElementById('rou-spin-btn').disabled=false;
+    handleRouResult(landed);
+  }
+  requestAnimationFrame(animate);
+}
+
+function handleRouResult(seg){
+  const g=G.rou;
+  const p=g.turn%2;
+  const gender=g.genders[p];
+  const name=g.names[p];
+
+  let resultText='';
+  if(seg.type==='safe'){resultText=`🎉 Safe! ${name} gets a free pass this turn.`;}
+  else if(seg.type==='strip'){resultText=`🔥 ${name} must remove ONE item of clothing now!`;}
+  else if(seg.type==='strip2'){resultText=`💥 ${name} must remove TWO items of clothing right now!`;}
+  else if(seg.type==='pstrip'){resultText=`😏 ${g.names[1-p]} must remove one item — ${name} watches!`;}
+  else if(seg.type==='truth'){
+    const q=pickRandom(TRUTHS.hot);
+    resultText=`💚 TRUTH: ${q}`;
+  } else if(seg.type==='dare'){
+    const pool=getDares(gender,'hot');
+    const d=pickRandom(pool);
+    resultText=`😈 DARE — ${d.t}: ${d.d}`;
+  } else if(seg.type==='wild'){
+    const w=pickRandom(WILD_CARDS);
+    resultText=`⭐ WILD — ${w.t}: ${w.d}`;
+  }
+
+  document.getElementById('rou-result').textContent=resultText;
+}
+
+function rouNext(){
+  G.rou.turn++;
+  const p=G.rou.turn%2;
+  document.getElementById('rou-turn-label').textContent=`${G.rou.names[p]}'s turn — spin the wheel!`;
+  document.getElementById('rou-result').textContent='Spin the wheel to see your fate...';
+}
+
+// =============================================
+// STRIP JENGA
+// =============================================
+const JENGA_ROWS=12;
+const JENGA_COLS=3;
+
+function showJngSetup(){showOnly('jng-setup');}
+
+function buildJengaTower(){
+  const types=['safe','safe','strip','dare','wild'];
+  const weights=[3,3,3,3,1]; // relative weight
+  const pool=[];
+  types.forEach((t,i)=>{for(let w=0;w<weights[i];w++) pool.push(t);});
+
+  const tower=[];
+  for(let r=0;r<JENGA_ROWS;r++){
+    const row=[];
+    for(let c=0;c<JENGA_COLS;c++){
+      row.push({type:pickRandom(pool),pulled:false,row:r,col:c});
+    }
+    tower.push(row);
+  }
+  return tower;
+}
+
+function startJng(){
+  const clothes=getChips('jng-clothes');
+  G.jng={
+    names:[document.getElementById('jng-n1').value.trim()||'Player 1',document.getElementById('jng-n2').value.trim()||'Player 2'],
+    genders:[document.getElementById('jng-g1').value,document.getElementById('jng-g2').value],
+    turn:0,
+    clothes:[JSON.parse(JSON.stringify(clothes)),JSON.parse(JSON.stringify(clothes))],
+    removed:[[],[]],
+    tower:buildJengaTower()
+  };
+  showOnly('jng-game');
+  renderJenga();
+}
+
+function renderJenga(){
+  const g=G.jng;
+  document.getElementById('jng-turn').textContent=`${g.names[g.turn%2]}'s Turn — pull a block!`;
+  const tower=document.getElementById('jengaTower');
+  tower.innerHTML='';
+  // Render bottom to top
+  for(let r=JENGA_ROWS-1;r>=0;r--){
+    const rowEl=document.createElement('div');rowEl.className='jng-row';
+    g.tower[r].forEach((block,c)=>{
+      const el=document.createElement('div');
+      el.className=`jng-block ${block.type}${block.pulled?' pulled':''}`;
+      const labels={safe:'SAFE',strip:'STRIP',dare:'DARE',wild:'WILD'};
+      el.textContent=labels[block.type];
+      if(!block.pulled) el.onclick=()=>pullBlock(r,c);
+      rowEl.appendChild(el);
+    });
+    tower.appendChild(rowEl);
+  }
+}
+
+function pullBlock(row,col){
+  const g=G.jng;
+  const block=g.tower[row][col];
+  if(block.pulled) return;
+  block.pulled=true;
+
+  const p=g.turn%2;
+  const gender=g.genders[p];
+  const name=g.names[p];
+
+  if(block.type==='safe'){
+    showPopup({badge:'SAFE',badgeColor:'var(--green)',icon:'😌',title:'Safe Block!',
+      text:`Lucky ${name}! This block is safe — no penalty, no dare. Pass the turn.`,
+      actions:[{label:'Phew! Next Turn',fn:()=>{closePopup();g.turn++;renderJenga();}}]
+    });
+  } else if(block.type==='strip'){
+    const remaining=g.clothes[p].filter(c=>!g.removed[p].includes(c));
+    if(!remaining.length){showPopup({badge:'STRIP',badgeColor:'var(--red)',icon:'🔥',title:'Nothing Left!',
+      text:`${name} has nothing left to remove! Game over — partner wins!`,
+      actions:[{label:'🏆 View Winner',fn:()=>{closePopup();showWin(`${g.names[1-p]} Wins!`,`${name} ran out of clothes!`);}}]});return;}
+    showPopup({badge:'STRIP 🔥',badgeColor:'var(--red)',icon:'🔥',title:'Strip!',
+      text:`${name} must remove one item of clothing slowly on camera. Partner watches and chooses which item.`,
+      actions:[
+        {label:'✓ Stripped',fn:()=>{g.removed[p].push(remaining[0]);closePopup();g.turn++;renderJenga();if(g.removed[p].length>=g.clothes[p].length){showWin(`${g.names[1-p]} Wins!`,`${name} is fully undressed!`);}}},
+        {label:'Skip (dare instead)',fn:()=>{closePopup();pullDareBlock(gender,name,p);}}
+      ]
+    });
+  } else if(block.type==='dare'){
+    pullDareBlock(gender,name,p);
+  } else if(block.type==='wild'){
+    const w=pickRandom(WILD_CARDS);
+    showPopup({badge:'WILD ⭐',badgeColor:'var(--gold)',icon:'⭐',title:w.t,text:w.d,
+      actions:[{label:'Done! Next Turn',fn:()=>{closePopup();g.turn++;renderJenga();}}]
+    });
+  }
+}
+
+function pullDareBlock(gender,name,p){
+  const g=G.jng;
+  const pool=getDares(gender,'hot');
+  const d=pickRandom(pool);
+  showPopup({badge:'DARE 😈',badgeColor:'var(--purple)',icon:'😈',title:d.t,text:d.d,
+    actions:[
+      {label:'✓ Dare Done! Next Turn',fn:()=>{closePopup();g.turn++;renderJenga();}},
+      {label:'✗ Refuse (strip instead)',fn:()=>{
+        const rem=g.clothes[p].filter(c=>!g.removed[p].includes(c));
+        if(rem.length){g.removed[p].push(rem[0]);}
+        closePopup();g.turn++;renderJenga();
+        if(g.removed[p].length>=g.clothes[p].length){showWin(`${g.names[1-p]} Wins!`,`${name} ran out of clothes!`);}
+      }}
+    ]
+  });
+}
+
+// =============================================
+// MONOPOLY
+// =============================================
+function showMonoSetup(){showOnly('mono-setup');}
+
+function startMono(){
+  const clothes=getChips('mo-clothes');
+  G.mono={
+    names:[document.getElementById('mo-n1').value.trim()||'Player 1',document.getElementById('mo-n2').value.trim()||'Player 2'],
+    genders:[document.getElementById('mo-g1').value,document.getElementById('mo-g2').value],
+    pos:[0,0],turn:0,rolling:false,
+    clothes:[JSON.parse(JSON.stringify(clothes)),JSON.parse(JSON.stringify(clothes))],
+    removed:[[],[]]
+  };
+  showOnly('mono-game');
+  buildMonoBoard();
+  renderMonoInfo();
+}
+
+function buildMonoBoard(){
+  const board=document.getElementById('monoBoard');
+  board.innerHTML='';
+
+  // 36 squares arranged Monopoly-style: 10 per side
+  // We use a 11x11 grid (corners shared)
+  // Top row (left to right): squares 0–9 + corner
+  // Right col (top to bottom): squares 10–18 + corner
+  // Bottom row (right to left): squares 19–27 + corner
+  // Left col (bottom to top): squares 28–29 + corners
+
+  const total=MONO_BOARD_DEF.length; // 30
+  // Assign indices to positions
+  // Simplified: top=0-8, corner=9, right=10-18, corner=19, bottom=20-28(reversed), corner=29, left(we skip for 30sq)
+
+  const topSqs=[0,1,2,3,4,5,6,7,8];
+  const rightSqs=[9,10,11,12,13,14,15,16,17];
+  const bottomSqs=[18,19,20,21,22,23,24,25,26];
+  const leftSqs=[29,28,27]; // just 3 to complete
+
+  function makeSq(idx){
+    const def=MONO_BOARD_DEF[idx%MONO_BOARD_DEF.length];
+    const el=document.createElement('div');
+    el.className=`msq t-${def.type}`;
+    el.id=`msq-${idx}`;
+    el.innerHTML=`<span class="sq-icon">${def.icon}</span><span class="sq-name">${def.name}</span><span class="sq-label">${def.label}</span>`;
+    return el;
+  }
+
+  function makeCorner(icon,label){
+    const el=document.createElement('div');
+    el.className='msq msq-corner';
+    el.innerHTML=`<span class="sq-icon" style="font-size:1.6rem">${icon}</span><span class="sq-name" style="font-size:0.65rem">${label}</span>`;
+    return el;
+  }
+
+  // Build simplified board rows
+  const topRow=document.createElement('div');
+  topRow.style.cssText='grid-area:top;display:flex;gap:3px;';
+  topSqs.forEach(i=>topRow.appendChild(makeSq(i)));
+
+  const rightCol=document.createElement('div');
+  rightCol.style.cssText='grid-area:right;display:flex;flex-direction:column;gap:3px;';
+  rightSqs.forEach(i=>rightCol.appendChild(makeSq(i)));
+
+  const bottomRow=document.createElement('div');
+  bottomRow.style.cssText='grid-area:bottom;display:flex;gap:3px;flex-direction:row-reverse;';
+  bottomSqs.forEach(i=>bottomRow.appendChild(makeSq(i)));
+
+  const leftCol=document.createElement('div');
+  leftCol.style.cssText='grid-area:left;display:flex;flex-direction:column-reverse;gap:3px;';
+  leftSqs.forEach(i=>leftCol.appendChild(makeSq(i)));
+
+  const tlCorner=document.createElement('div');tlCorner.style.gridArea='corner-tl';
+  tlCorner.appendChild(makeCorner('🏁','START'));
+  const trCorner=document.createElement('div');trCorner.style.gridArea='corner-tr';
+  trCorner.appendChild(makeCorner('🔄','FREE PASS'));
+  const blCorner=document.createElement('div');blCorner.style.gridArea='corner-bl';
+  blCorner.appendChild(makeCorner('😈','DARE JAIL'));
+  const brCorner=document.createElement('div');brCorner.style.gridArea='corner-br';
+  brCorner.appendChild(makeCorner('⭐','WILD ZONE'));
+
+  const center=document.createElement('div');
+  center.style.gridArea='center';
+  center.className='mono-center';
+  center.innerHTML=`
+    <div class="mono-center-title">Naughty<br>Monopoly</div>
+    <div class="mono-center-sub">Long Distance Edition</div>
+    <div class="center-dice-area">
+      <div class="mono-die" id="mo-d1">🎲</div>
+      <div class="mono-die" id="mo-d2">🎲</div>
+    </div>`;
+
+  board.appendChild(tlCorner);
+  board.appendChild(topRow);
+  board.appendChild(trCorner);
+  board.appendChild(leftCol);
+  board.appendChild(center);
+  board.appendChild(rightCol);
+  board.appendChild(blCorner);
+  board.appendChild(bottomRow);
+  board.appendChild(brCorner);
+
+  placeMonoTokens();
+}
+
+function placeMonoTokens(){
+  document.querySelectorAll('.mono-token').forEach(t=>t.remove());
+  const sqIds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29];
+
+  G.mono.pos.forEach((pos,p)=>{
+    const el=document.createElement('div');
+    el.className=`token tok-p${p+1} mono-token`;
+    el.textContent=p+1;
+    const sqEl=document.getElementById(`msq-${pos}`);
+    if(sqEl) sqEl.appendChild(el);
+  });
+}
+
+function renderMonoInfo(){
+  const g=G.mono;
+  const bar=document.getElementById('mono-info-bar');
+  bar.innerHTML='';
+  for(let p=0;p<2;p++){
+    const card=document.createElement('div');
+    card.className=`m-player-card${g.turn%2===p?' active':''}`;
+    const on=g.clothes[p].filter(c=>!g.removed[p].includes(c));
+    const clothesHtml=g.clothes[p].map(c=>`<span class="m-cloth${g.removed[p].includes(c)?' off':''}">${c}</span>`).join('');
+    card.innerHTML=`
+      <div class="m-pc-name">${g.names[p]} ${g.turn%2===p?'🎲':''}</div>
+      <div class="m-pc-sq">Square ${g.pos[p]} · ${on.length} item${on.length!==1?'s':''} on</div>
+      <div class="m-pc-clothes">${clothesHtml}</div>`;
+    bar.appendChild(card);
+  }
+}
+
+const DICE_F=['⚀','⚁','⚂','⚃','⚄','⚅'];
+
+function monoRoll(){
+  const g=G.mono;
+  if(g.rolling) return;
+  g.rolling=true;
+  document.getElementById('mono-roll-btn').disabled=true;
+
+  const d1=document.getElementById('mo-d1');
+  const d2=document.getElementById('mo-d2');
+  d1.classList.add('rolling');d2.classList.add('rolling');
+
+  let ticks=0;
+  const inter=setInterval(()=>{
+    d1.textContent=DICE_F[Math.floor(Math.random()*6)];
+    d2.textContent=DICE_F[Math.floor(Math.random()*6)];
+    if(++ticks>=10){
+      clearInterval(inter);
+      d1.classList.remove('rolling');d2.classList.remove('rolling');
+      const v1=Math.floor(Math.random()*6)+1;
+      const v2=Math.floor(Math.random()*6)+1;
+      d1.textContent=DICE_F[v1-1];d2.textContent=DICE_F[v2-1];
+
+      const p=g.turn%2;
+      g.pos[p]=(g.pos[p]+v1+v2)%MONO_BOARD_DEF.length;
+      placeMonoTokens();
+      renderMonoInfo();
+
+      setTimeout(()=>triggerMonoSq(p,g.pos[p]),500);
+    }
+  },80);
+}
+
+function triggerMonoSq(p,sqIdx){
+  const g=G.mono;
+  const sq=MONO_BOARD_DEF[sqIdx];
+  const gender=g.genders[p];
+  const name=g.names[p];
+
+  function nextTurn(){
+    closePopup();
+    g.rolling=false;
+    document.getElementById('mono-roll-btn').disabled=false;
+    g.turn++;
+    renderMonoInfo();
+  }
+
+  function doStrip(count=1,cb){
+    const remaining=g.clothes[p].filter(c=>!g.removed[p].includes(c));
+    if(!remaining.length){showWin(`${g.names[1-p]} Wins!`,`${name} has nothing left to wear!`);return;}
+    for(let i=0;i<Math.min(count,remaining.length);i++) g.removed[p].push(remaining[i]);
+    renderMonoInfo();
+    if(g.removed[p].length>=g.clothes[p].length){showWin(`${g.names[1-p]} Wins!`,`${name} lost everything!`);return;}
+    if(cb) cb();
+  }
+
+  if(sq.type==='start'){
+    showPopup({badge:'FREE PASS',badgeColor:'var(--blue)',icon:'🏁',title:'Safe Zone!',
+      text:`${name} landed on a safe square. No strip, no dare this turn. Enjoy the breather!`,
+      actions:[{label:'Continue',fn:nextTurn}]
+    });
+  } else if(sq.type==='strip'){
+    showPopup({badge:'STRIP 🔥',badgeColor:'var(--red)',icon:'🔥',title:`Strip — ${sq.name}`,
+      text:`${name} landed on ${sq.name}!\n\nRemove one item of clothing slowly on camera. Your partner watches and chooses which item goes.`,
+      actions:[
+        {label:'✓ Stripped!',fn:()=>{doStrip(1,nextTurn);}},
+        {label:'✗ Refuse (dare instead)',fn:()=>{closePopup();const pool=getDares(gender,'hot');const d=pickRandom(pool);
+          showPopup({badge:'DARE 😈',badgeColor:'var(--purple)',icon:'😈',title:d.t,text:d.d,
+            actions:[{label:'Done! Continue',fn:nextTurn},{label:'Also refuse (strip x2)',fn:()=>{doStrip(2,nextTurn);}}]
+          });}}
+      ]
+    });
+  } else if(sq.type==='dare'){
+    const pool=getDares(gender,'hot');
+    const d=pickRandom(pool);
+    showPopup({badge:'DARE 😈',badgeColor:'var(--purple)',icon:'😈',title:d.t,text:d.d,
+      actions:[
+        {label:'✓ Dare Done!',fn:nextTurn},
+        {label:'✗ Refuse (strip instead)',fn:()=>{doStrip(1,nextTurn);}}
+      ]
+    });
+  } else if(sq.type==='wild'){
+    const w=pickRandom(WILD_CARDS);
+    showPopup({badge:'WILD ⭐',badgeColor:'var(--gold)',icon:'⭐',title:w.t,text:w.d,
+      actions:[{label:'Done! Continue',fn:nextTurn}]
+    });
+  }
+}
+
+// =============================================
+// DARE LIST SCREEN
+// =============================================
+function showDareList(){
+  showOnly('dare-list');
+  const body=document.getElementById('dareListBody');
+  body.innerHTML='';
+
+  const hint=document.createElement('div');
+  hint.className='copy-hint';
+  hint.textContent='📋 Copy any dare below and paste it into the CARDS section of the HTML game file to customize your game.';
+  body.appendChild(hint);
+
+  const sections=[
+    {title:'🌶 Mild Dares — Both Genders',color:'green',items:DARES_BY_GENDER.both.mild},
+    {title:'🔥 Hot Dares — Both Genders',color:'red',items:DARES_BY_GENDER.both.hot},
+    {title:'💥 Wild Dares — Both Genders',color:'red',items:DARES_BY_GENDER.both.wild},
+    {title:'💋 Dares — For Her',color:'purple',items:[...DARES_BY_GENDER.f.mild,...DARES_BY_GENDER.f.hot,...DARES_BY_GENDER.f.wild],tag:'f'},
+    {title:'💪 Dares — For Him',color:'gold',items:[...DARES_BY_GENDER.m.mild,...DARES_BY_GENDER.m.hot,...DARES_BY_GENDER.m.wild],tag:'m'},
+    {title:'⭐ Wild Cards',color:'gold',items:WILD_CARDS},
+  ];
+
+  sections.forEach(sec=>{
+    const div=document.createElement('div');div.className='dare-section';
+    const h=document.createElement('h3');h.className=sec.color;h.textContent=sec.title;
+    div.appendChild(h);
+    sec.items.forEach((item,i)=>{
+      const row=document.createElement('div');row.className='dare-item';
+      const tagHtml=sec.tag?`<div class="di-tag tag-${sec.tag}">${sec.tag==='f'?'Her':'Him'}</div>`:`<div class="di-tag tag-b">Both</div>`;
+      row.innerHTML=`<div class="di-num">${i+1}.</div><div class="di-text"><strong>${item.t||item.title||''}</strong>${item.t?':':''} ${item.d||item.dare||''}</div>${tagHtml}`;
+      div.appendChild(row);
+    });
+    body.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
